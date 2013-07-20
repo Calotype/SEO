@@ -1,6 +1,6 @@
 <?php namespace Calotype\SEO\Generators;
 
-use XMLWriter, DateTime, Traversable;
+use XMLWriter, Traversable;
 use Calotype\SEO\Contracts\SitemapAware;
 
 class SitemapGenerator
@@ -34,10 +34,6 @@ class SitemapGenerator
         $last_modified = $element->getSitemapLastModified();
         $change_frequency = $element->getSitemapChangeFrequency();
         $priority = $element->getSitemapPriority();
-
-        if ($last_modified instanceof DateTime) {
-            $last_modified = $last_modified->format('Y-m-d');
-        }
 
         $this->elements[] = array($location, $last_modified, $change_frequency, $priority);
     }
