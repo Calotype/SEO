@@ -1,7 +1,7 @@
-<?php namespace Goforit\Doit\SEO\Generators;
+<?php namespace Calotype\SEO\Generators;
 
 use XMLWriter, DateTime, Traversable;
-use Goforit\Doit\SEO\Contracts\SitemapAware;
+use Calotype\SEO\Contracts\SitemapAware;
 
 class SitemapGenerator
 {
