@@ -136,14 +136,14 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         $generator->addAll(function() use ($me) {
             $elements = array();
 
-            $elements[] = $this->getElementMock(array(
+            $elements[] = $me->getElementMock(array(
                 'location' => 'example.com',
                 'last_modified' => '2013-01-28',
                 'change_frequency' => 'weekly',
                 'priority' => '0.65'
             ));
 
-            $elements[] = $this->getElementMock(array(
+            $elements[] = $me->getElementMock(array(
                 'location' => 'example.org',
                 'last_modified' => '2013-01-30',
                 'change_frequency' => 'monthly',
