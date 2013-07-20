@@ -1,6 +1,5 @@
 <?php namespace Calotype\SEO\Generators;
 
-use Config;
 use Calotype\SEO\Contracts\MetaAware;
 
 class MetaGenerator
@@ -20,6 +19,29 @@ class MetaGenerator
     protected $description;
 
     /**
+     * The default configurations.
+     *
+     * @var array
+     */
+    protected $defaults = array(
+        'title' => false,
+        'description' => false,
+        'separator' => ' | '
+    );
+
+    /**
+     * Create a new MetaGenerator instance.
+     *
+     * @param array $defaults
+     */
+    public function __construct(array $defaults = array())
+    {
+        foreach ($defaults as $key => $value) {
+            $this->defaults[$key] = $value;
+        }
+    }
+
+    /**
      * Render the meta tags.
      *
      * @return string
@@ -36,21 +58,21 @@ class MetaGenerator
     }
 
     /**
-     * Use the meta data of a MetaAware instance.
+     * Use the meta data of a MetaAware object.
      *
-     * @param  MetaAware $instance
+     * @param  MetaAware $object
      */
-    public function instance(MetaAware $instance)
+    public function object(MetaAware $object)
     {
-        $title = $instance->getMetaTitle();
-        $description = $instance->getMetaDescription();
+        $data = $object->getMetaData();
 
-        if ($suffix = $instance->getMetaTitleSuffix()) {
-            $title = $title . Config::get('doit::seo.separator') . $suffix;
+        if (array_key_exists('title', $data)) {
+            $this->setTitle($data['title']);
         }
 
-        $this->setTitle($title);
-        $this->setDescription($description);
+        if (array_key_exists('description', $data)) {
+            $this->setDescription('description');
+        }
     }
 
     /**
@@ -90,7 +112,7 @@ class MetaGenerator
      */
     public function getTitle()
     {
-        return $this->title ?: Config::get('doit::seo.title');
+        return $this->title ?: $this->getDefault('title');
     }
 
     /**
@@ -100,6 +122,22 @@ class MetaGenerator
      */
     public function getDescription()
     {
-        return $this->description ?: Config::get('doit::seo.description');
+        return $this->description ?: $this->getDefault('description');
+    }
+
+    /**
+     * Get a default configuration.
+     *
+     * @param  string $default
+     *
+     * @return mixed
+     */
+    protected function getDefault($default)
+    {
+        if (array_key_exists($default, $this->defaults)) {
+            return $this->defaults[$default];
+        }
+
+        throw new \InvalidArgumentException("Default configuration $default does not exist.");
     }
 }

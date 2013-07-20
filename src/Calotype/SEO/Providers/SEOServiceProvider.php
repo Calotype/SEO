@@ -23,6 +23,8 @@ class SEOServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app['config']->package('calotype/seo', __DIR__ . '/../../../config');
+
         $this->registerBindings();
     }
 
@@ -82,7 +84,7 @@ class SEOServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('doit.seo.generators.meta', 'doit.seo.generators.sitemap', 'doit.seo.generators.robots');
+        return array('calotype.seo.generators.meta', 'calotype.seo.generators.sitemap', 'calotype.seo.generators.robots');
     }
 
 }
