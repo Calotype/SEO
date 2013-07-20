@@ -37,6 +37,12 @@ class SEOServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
+        // Create the default robots.txt content
+        $this->app['calotype.seo.generators.robots']->addUserAgent('*');
+        $this->app['calotype.seo.generators.robots']->addDisallow('');
+        $this->app['calotype.seo.generators.robots']->addSpacer();
+        $this->app['calotype.seo.generators.robots']->addSitemap($this->app['request']->root() . '/sitemap.xml');
+
         // Generate sitemap.xml route
         $this->app['router']->get('sitemap.xml', function() use ($app) {
             $response = new Response($app['calotype.seo.generators.sitemap']->generate(), 200);

@@ -121,4 +121,14 @@ class RobotsGenerator
             $this->addLine($line);
         }
     }
+
+    /**
+     * Clean all lines from the robots.txt.
+     *
+     * @return void
+     */
+    public function clean()
+    {
+        $this->lines = array();
+    }
 }

@@ -97,6 +97,16 @@ class SitemapGenerator
     }
 
     /**
+     * Clean all entries from the sitemap.
+     *
+     * @return void
+     */
+    public function clean()
+    {
+        $this->entries = array();
+    }
+
+    /**
      * Generate the xml for the sitemap.
      *
      * @return string
