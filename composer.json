@@ -1,0 +1,31 @@
+{
+    "name": "calotype/seo",
+    "description": "Calotype SEO package for SEO helpers.",
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Bryan te Beek",
+            "email": "bryantebeek@gmail.com"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.3.0"
+    },
+
+    "require-dev": {
+        "mockery/mockery": "0.7.2",
+        "phpunit/phpunit": "3.7.*"
+    },
+
+    "suggest": {
+        "laravel/framework": "Calotype has built-in support for Laravel 4 using Service Providers and Facades."
+    },
+
+    "autoload": {
+        "psr-0": { "Calotype\\SEO": "src/" }
+    },
+
+    "minimum-stability": "dev"
+}
