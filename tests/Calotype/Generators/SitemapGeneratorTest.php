@@ -58,7 +58,7 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         $generator = $this->getGenerator();
 
         $me = $this;
-        $generator->add(function() use($me) {
+        $generator->add(function() use ($me) {
             return $me->getElementMock('example.com', '2013-01-28', 'weekly', '0.65');
         });
         $sitemap = $generator->generate();
@@ -71,7 +71,7 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         $generator = $this->getGenerator();
 
         $me = $this;
-        $generator->addAll(function() use($me) {
+        $generator->addAll(function() use ($me) {
             $elements = array();
             $elements[] = $me->getElementMock('example.com', '2013-01-28', 'weekly', '0.65');
             $elements[] = $me->getElementMock('example.org', '2013-01-30', 'monthly', '0.5');
@@ -82,7 +82,7 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         $this->assertXmlStringEqualsXmlFile(__DIR__ . '/xml/sitemap-multiple.xml', $sitemap);
     }
 
-    protected function getElementMock($location, $last_modification, $change_frequency, $priority)
+    public function getElementMock($location, $last_modification, $change_frequency, $priority)
     {
         return Mockery::mock('Calotype\SEO\Contracts\SitemapAware', array(
             'getSitemapLocation' => $location,
