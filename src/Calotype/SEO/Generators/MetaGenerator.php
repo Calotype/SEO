@@ -84,7 +84,7 @@ class MetaGenerator
     {
         $title = strip_tags($title);
 
-        $this->title = $title . Config::get('doit::seo.separator') . Config::get('doit::seo.title');
+        $this->title = $title . $this->getDefault('separator') . $this->getDefault('title');
     }
 
     /**
