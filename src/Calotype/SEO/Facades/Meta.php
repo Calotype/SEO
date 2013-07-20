@@ -9,5 +9,5 @@ class Meta extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'doit.seo.generators.meta'; }
+    protected static function getFacadeAccessor() { return 'calotype.seo.generators.meta'; }
 }

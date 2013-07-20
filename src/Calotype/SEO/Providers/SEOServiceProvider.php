@@ -35,17 +35,17 @@ class SEOServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
-        // Generate sitemap.xml
+        // Generate sitemap.xml route
         $this->app['router']->get('sitemap.xml', function() use ($app) {
-            $response = new Response($app['doit.seo.generators.sitemap']->generate(), 200);
+            $response = new Response($app['calotype.seo.generators.sitemap']->generate(), 200);
             $response->header('Content-Type', 'text/xml');
 
             return $response;
         });
 
-        // Generate robots.txt
+        // Generate robots.txt route
         $this->app['router']->get('robots.txt', function() use ($app) {
-            $response = new Response($app['doit.seo.generators.robots']->generate(), 200);
+            $response = new Response($app['calotype.seo.generators.robots']->generate(), 200);
             $response->header('Content-Type', 'text/plain');
 
             return $response;
@@ -60,17 +60,17 @@ class SEOServiceProvider extends ServiceProvider
     public function registerBindings()
     {
         // Register the Sitemap generator
-        $this->app->singleton('doit.seo.generators.sitemap', function($app) {
+        $this->app->singleton('calotype.seo.generators.sitemap', function($app) {
             return new SitemapGenerator();
         });
 
         // Register the Meta generator
-        $this->app->singleton('doit.seo.generators.meta', function($app) {
-            return new MetaGenerator();
+        $this->app->singleton('calotype.seo.generators.meta', function($app) {
+            return new MetaGenerator($app['config']->get('seo::defaults'));
         });
 
         // Register the Robots generator
-        $this->app->singleton('doit.seo.generators.robots', function($app) {
+        $this->app->singleton('calotype.seo.generators.robots', function($app) {
             return new RobotsGenerator();
         });
     }

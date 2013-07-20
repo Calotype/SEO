@@ -9,5 +9,5 @@ class Sitemap extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'doit.seo.generators.sitemap'; }
+    protected static function getFacadeAccessor() { return 'calotype.seo.generators.sitemap'; }
 }
