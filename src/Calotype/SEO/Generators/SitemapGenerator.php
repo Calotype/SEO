@@ -6,11 +6,11 @@ use Calotype\SEO\Contracts\SitemapAware;
 class SitemapGenerator
 {
     /**
-     * All the elements of the sitemap.
+     * All the entries of the sitemap.
      *
      * @var array
      */
-    protected $elements = array();
+    protected $entries = array();
 
     /**
      * Closures used for lazy loading.
@@ -20,51 +20,80 @@ class SitemapGenerator
     protected $closures = array();
 
     /**
-     * Add a SitemapAware element to the sitemap.
+     * The required fields of a sitemap entry.
      *
-     * @param mixed $element
+     * @var array
      */
-    public function add($element)
+    protected $required = array(
+        'loc', 'lastmod', 'changefreq', 'priority'
+    );
+
+    /**
+     * The attributes that should be replaced with
+     * their valid counterpart for readability.
+     *
+     * @var array
+     */
+    protected $replacements = array(
+        'location' => 'loc',
+        'last_modified' => 'lastmod',
+        'change_frequency' => 'changefreq'
+    );
+
+    /**
+     * The allowed values for the change frequency.
+     *
+     * @var array
+     */
+    protected $frequencies = array(
+        'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'
+    );
+
+    /**
+     * Add a SitemapAware object to the sitemap.
+     *
+     * @param mixed $object
+     */
+    public function add($object)
     {
-        if (is_a($element, 'Closure')) {
-            return $this->closures[] = $element;
+        if (is_a($object, 'Closure')) {
+            return $this->closures[] = $object;
         }
 
-        $location = $element->getSitemapLocation();
-        $last_modified = $element->getSitemapLastModified();
-        $change_frequency = $element->getSitemapChangeFrequency();
-        $priority = $element->getSitemapPriority();
+        $this->validateObject($object);
 
-        $this->elements[] = array($location, $last_modified, $change_frequency, $priority);
+        $data = $object->getSitemapData();
+        $this->validateData($data);
+
+        $this->entries[] = $data;
     }
 
     /**
-     * Add multiple SitemapAware elements to the sitemap.
+     * Add multiple SitemapAware objects to the sitemap.
      *
-     * @param mixed $elements
+     * @param array|Traversable $objects
      */
-    public function addAll($elements)
+    public function addAll($objects)
     {
-        if (is_a($elements, 'Closure')) {
-            return $this->closures[] = $elements;
+        if (is_a($objects, 'Closure')) {
+            return $this->closures[] = $objects;
         }
 
-        foreach ($elements as $instance) {
-            $this->add($instance);
+        foreach ($objects as $object) {
+            $this->add($object);
         }
     }
 
     /**
-     * Add a raw element to the sitemap.
+     * Add a raw entry to the sitemap.
      *
-     * @param string $location
-     * @param string $last_modified
-     * @param string $change_frequency
-     * @param string $priority
+     * @param array $data
      */
-    public function addRaw($location, $last_modified, $change_frequency = 'monthly', $priority = '0.5')
+    public function addRaw($data)
     {
-        $this->elements[] = array($location, $last_modified, $change_frequency, $priority);
+        $this->validateData($data);
+
+        $this->entries[] = $data;
     }
 
     /**
@@ -82,18 +111,89 @@ class SitemapGenerator
         $xml->writeRaw('<?xml version="1.0" encoding="UTF-8"?>');
         $xml->writeRaw('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
 
-        foreach ($this->elements as $element) {
+        foreach ($this->entries as $data) {
             $xml->startElement('url');
-            $xml->writeElement('loc', $element[0]);
-            $xml->writeElement('lastmod', $element[1]);
-            $xml->writeElement('changefreq', $element[2]);
-            $xml->writeElement('priority', $element[3]);
+
+            $data = $this->replaceAttributes($data);
+
+            foreach ($data as $attribute => $value) {
+                $xml->writeElement($attribute, $value);
+            }
+
             $xml->endElement();
         }
 
         $xml->writeRaw('</urlset>');
 
         return $xml->outputMemory();
+    }
+
+    /**
+     * Validate the data for a sitemap entry.
+     *
+     * @param  array $data
+     */
+    protected function validateData($data)
+    {
+        $data = $this->replaceAttributes($data);
+
+        foreach ($this->required as $requirement) {
+            if (! array_key_exists($requirement, $data)) {
+                $replacement = array_search($requirement, $this->replacements);
+
+                if ($replacement !== false) {
+                    $requirement = $replacement;
+                }
+
+                throw new \InvalidArgumentException("$requirement is required in the sitemap data.");
+            }
+        }
+    }
+
+    /**
+     * Validate an element.
+     *
+     * @param  mixed $element
+     */
+    protected function validateObject($element)
+    {
+        if (! $element instanceof SitemapAware) {
+            throw new \InvalidArgumentException("Element should implement Calotype\SEO\Contracts\SitemapAware");
+        }
+    }
+
+    /**
+     * Replace the attribute names with their replacements.
+     *
+     * @param  array $data
+     *
+     * @return array
+     */
+    protected function replaceAttributes($data)
+    {
+        foreach ($data as $attribute => $value) {
+            $replacement = $this->replaceAttribute($attribute);
+            unset($data[$attribute]);
+            $data[$replacement] = $value;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Replace an attribute with it's replacement if available.
+     *
+     * @param  string $attribute
+     *
+     * @return string
+     */
+    protected function replaceAttribute($attribute)
+    {
+        if (array_key_exists($attribute, $this->replacements)) {
+            return $this->replacements[$attribute];
+        }
+
+        return $attribute;
     }
 
     /**
