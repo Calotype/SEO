@@ -51,8 +51,8 @@ class MetaGenerator
         $title = $this->getTitle();
         $description = $this->getDescription();
 
-        $html[] = "<title>{$title}</title>";
-        $html[] = "<meta name='description' content='{description}' />";
+        $html[] = "<title>$title</title>";
+        $html[] = "<meta name='description' content='$description' />";
 
         return implode(PHP_EOL, $html);
     }
