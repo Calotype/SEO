@@ -65,7 +65,7 @@ class SitemapGenerator
         $data = $object->getSitemapData();
         $this->validateData($data);
 
-        $this->entries[] = $data;
+        $this->entries[] = $this->replaceAttributes($data);
     }
 
     /**
@@ -93,7 +93,7 @@ class SitemapGenerator
     {
         $this->validateData($data);
 
-        $this->entries[] = $data;
+        $this->entries[] = $this->replaceAttributes($data);
     }
 
     /**
@@ -124,8 +124,6 @@ class SitemapGenerator
         foreach ($this->entries as $data) {
             $xml->startElement('url');
 
-            $data = $this->replaceAttributes($data);
-
             foreach ($data as $attribute => $value) {
                 $xml->writeElement($attribute, $value);
             }
@@ -147,12 +145,12 @@ class SitemapGenerator
     {
         $data = $this->replaceAttributes($data);
 
-        foreach ($this->required as $requirement) {
-            if (! array_key_exists($requirement, $data)) {
-                $replacement = array_search($requirement, $this->replacements);
+        foreach ($this->required as $required) {
+            if (! array_key_exists($required, $data)) {
+                $replacement = array_search($required, $this->replacements);
 
                 if ($replacement !== false) {
-                    $requirement = $replacement;
+                    $required = $replacement;
                 }
 
                 throw new \InvalidArgumentException("Required sitemap property [$required] is not present.");
