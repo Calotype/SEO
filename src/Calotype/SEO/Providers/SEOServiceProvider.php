@@ -3,6 +3,7 @@
 use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
 
+use Calotype\SEO\Commands\RoutesCommand;
 use Calotype\SEO\Generators\MetaGenerator;
 use Calotype\SEO\Generators\RobotsGenerator;
 use Calotype\SEO\Generators\SitemapGenerator;
@@ -27,6 +28,7 @@ class SEOServiceProvider extends ServiceProvider
         $this->app['config']->package('calotype/seo', __DIR__ . '/../../../config');
 
         $this->registerBindings();
+        $this->registerCommands();
     }
 
     /**
@@ -88,6 +90,19 @@ class SEOServiceProvider extends ServiceProvider
             return new OpenGraphGenerator();
         });
     }
+
+    /**
+     * Register the commands.
+     *
+     * @return void
+     */
+    public function registerCommands()
+    {
+        $this->app['calotype.seo.commands.routes'] = $this->app->share(function($app) {
+            return new RoutesCommand($app);
+        });
+
+        $this->commands('calotype.seo.commands.routes');
     }
 
     /**
@@ -97,7 +112,12 @@ class SEOServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('calotype.seo.generators.meta', 'calotype.seo.generators.sitemap', 'calotype.seo.generators.robots');
+        return array(
+            'calotype.seo.generators.meta',
+            'calotype.seo.generators.sitemap',
+            'calotype.seo.generators.robots',
+            'calotype.seo.commands.routes',
+        );
     }
 
 }
