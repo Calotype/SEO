@@ -155,7 +155,7 @@ class SitemapGenerator
                     $requirement = $replacement;
                 }
 
-                throw new \InvalidArgumentException("$requirement is required in the sitemap data.");
+                throw new \InvalidArgumentException("Required sitemap property [$required] is not present.");
             }
         }
     }
