@@ -88,6 +88,17 @@ class MetaGenerator
     }
 
     /**
+     * Reset the title and description fields.
+     *
+     * @return void
+     */
+    public function clean()
+    {
+        $this->title = null;
+        $this->description = null;
+    }
+
+    /**
      * Set the Meta description.
      *
      * @param string $description
