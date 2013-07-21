@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Calotype\SEO\Generators\MetaGenerator;
 use Calotype\SEO\Generators\RobotsGenerator;
 use Calotype\SEO\Generators\SitemapGenerator;
+use Calotype\SEO\Generators\OpenGraphGenerator;
 
 class SEOServiceProvider extends ServiceProvider
 {
@@ -67,20 +68,26 @@ class SEOServiceProvider extends ServiceProvider
      */
     public function registerBindings()
     {
-        // Register the Sitemap generator
+        // Register the sitemap.xml generator
         $this->app->singleton('calotype.seo.generators.sitemap', function($app) {
             return new SitemapGenerator();
         });
 
-        // Register the Meta generator
+        // Register the meta tags generator
         $this->app->singleton('calotype.seo.generators.meta', function($app) {
             return new MetaGenerator($app['config']->get('seo::defaults'));
         });
 
-        // Register the Robots generator
+        // Register the robots.txt generator
         $this->app->singleton('calotype.seo.generators.robots', function($app) {
             return new RobotsGenerator();
         });
+
+        // Register the open graph properties generator
+        $this->app->singleton('calotype.seo.generators.opengraph', function($app) {
+            return new OpenGraphGenerator();
+        });
+    }
     }
 
     /**
