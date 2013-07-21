@@ -97,6 +97,26 @@ class SitemapGenerator
     }
 
     /**
+     * Check if the sitemap contains an url.
+     *
+     * @param  string $url
+     *
+     * @return boolean
+     */
+    public function contains($url)
+    {
+        $url = trim($url, '/');
+
+        foreach ($this->entries as $entry) {
+            if ($entry['loc'] == $url) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Clean all entries from the sitemap.
      *
      * @return void
