@@ -2,7 +2,7 @@
 
 # Calotype / SEO (Search Engine Optimization)
 
-> **Warning!** This package is still in a very early alpha state.
+> **Warning!** This package is still in an alpha/beta state.
 
 SEO is a package that provides helpers for some common SEO techniques.
 
