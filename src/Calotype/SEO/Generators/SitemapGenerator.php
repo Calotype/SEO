@@ -117,16 +117,6 @@ class SitemapGenerator
     }
 
     /**
-     * Clean all entries from the sitemap.
-     *
-     * @return void
-     */
-    public function clean()
-    {
-        $this->entries = array();
-    }
-
-    /**
      * Generate the xml for the sitemap.
      *
      * @return string
@@ -154,6 +144,16 @@ class SitemapGenerator
         $xml->writeRaw('</urlset>');
 
         return $xml->outputMemory();
+    }
+
+    /**
+     * Clean all entries from the sitemap.
+     *
+     * @return void
+     */
+    public function reset()
+    {
+        $this->entries = array();
     }
 
     /**

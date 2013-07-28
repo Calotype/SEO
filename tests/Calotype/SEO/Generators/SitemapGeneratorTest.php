@@ -32,7 +32,7 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
 
         $sitemap = $generator->generate();
 
-        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/xml/sitemap.xml', $sitemap);
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/stubs/sitemap.xml', $sitemap);
     }
 
     /**
@@ -47,8 +47,6 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         ));
 
         $sitemap = $generator->generate();
-
-        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/xml/sitemap.xml', $sitemap);
     }
 
     public function testCanAddElement()
@@ -65,7 +63,42 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         $generator->add($element);
         $sitemap = $generator->generate();
 
-        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/xml/sitemap.xml', $sitemap);
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/stubs/sitemap.xml', $sitemap);
+    }
+
+    public function testCanReset()
+    {
+        $generator = $this->getGenerator();
+
+        $element = $this->getElementMock(array(
+            'location' => 'example.com',
+            'last_modified' => '2013-01-28',
+            'change_frequency' => 'weekly',
+            'priority' => '0.65'
+        ));
+
+        $generator->add($element);
+        $generator->reset();
+        $sitemap = $generator->generate();
+
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/stubs/sitemap-empty.xml', $sitemap);
+    }
+
+    public function testCanCheckIfSitemapContainsURL()
+    {
+        $generator = $this->getGenerator();
+
+        $element = $this->getElementMock(array(
+            'location' => 'example.com',
+            'last_modified' => '2013-01-28',
+            'change_frequency' => 'weekly',
+            'priority' => '0.65'
+        ));
+
+        $generator->add($element);
+
+        $this->assertTrue($generator->contains('example.com'));
+        $this->assertFalse($generator->contains('example.org'));
     }
 
     /**
@@ -80,7 +113,7 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         $generator->add($element);
         $sitemap = $generator->generate();
 
-        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/xml/sitemap.xml', $sitemap);
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/stubs/sitemap.xml', $sitemap);
     }
 
     public function testCanAddMultipleElements()
@@ -106,7 +139,7 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         $generator->addAll($elements);
         $sitemap = $generator->generate();
 
-        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/xml/sitemap-multiple.xml', $sitemap);
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/stubs/sitemap-multiple.xml', $sitemap);
     }
 
     public function testCanAddClosure()
@@ -125,7 +158,7 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
 
         $sitemap = $generator->generate();
 
-        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/xml/sitemap.xml', $sitemap);
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/stubs/sitemap.xml', $sitemap);
     }
 
     public function testCanAddClosureWithMultipleElements()
@@ -155,7 +188,7 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
 
         $sitemap = $generator->generate();
 
-        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/xml/sitemap-multiple.xml', $sitemap);
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/stubs/sitemap-multiple.xml', $sitemap);
     }
 
     public function getElementMock($data)
