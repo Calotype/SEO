@@ -123,11 +123,11 @@ class RobotsGenerator
     }
 
     /**
-     * Clean all lines from the robots.txt.
+     * Reset the lines.
      *
      * @return void
      */
-    public function clean()
+    public function reset()
     {
         $this->lines = array();
     }

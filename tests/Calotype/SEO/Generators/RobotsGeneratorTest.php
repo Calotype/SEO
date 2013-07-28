@@ -6,13 +6,10 @@ class RobotsGeneratorTest extends PHPUnit_Framework_TestCase
 {
     public function testCanGenerate()
     {
-        // Arrange
         $generator = $this->getGenerator();
 
-        // Act
         $robots_txt = $generator->generate();
 
-        // Assert
         $this->assertEquals('', $robots_txt);
     }
 
@@ -73,6 +70,16 @@ ROBOTS;
         ), $expected);
     }
 
+    public function testCanReset()
+    {
+        $expected = '';
+
+        $this->assertRobotsTxt(array(
+            'addHost' => 'example.com',
+            'reset'
+        ), $expected);
+    }
+
     public function testCanAddSpacer()
     {
         $expected = <<<ROBOTS
@@ -128,17 +135,18 @@ ROBOTS;
 
     protected function assertRobotsTxt(array $functions, $expected)
     {
-        // Arrange
         $generator = $this->getGenerator();
 
-        // Act
         foreach ($functions as $function => $argument) {
-            $generator->{$function}($argument);
+            if (empty($function)) {
+                $generator->{$argument}();
+            } else {
+                $generator->{$function}($argument);
+            }
         }
 
         $robots_txt = $generator->generate();
 
-        // Assert
         $this->assertEquals($expected, $robots_txt);
     }
 
