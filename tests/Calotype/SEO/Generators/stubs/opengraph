@@ -1,0 +1,5 @@
+<meta property="og:title" content="Foo" />
+<meta property="og:type" content="video.movie" />
+<meta property="og:image" content="http://example.org/foo.jpg" />
+<meta property="og:url" content="http://example.org/foo" />
+<meta property="og:site_name" content="Example.org" />

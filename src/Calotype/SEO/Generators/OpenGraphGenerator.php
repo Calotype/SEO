@@ -35,15 +35,6 @@ class OpenGraphGenerator
     );
 
     /**
-     * The properties that are optional.
-     *
-     * @var array
-     */
-    protected $optional = array(
-        'audio', 'description', 'determiner', 'locale', 'locale:alternate', 'video'
-    );
-
-    /**
      * Render the open graph tags.
      *
      * @return string
@@ -67,7 +58,7 @@ class OpenGraphGenerator
      *
      * @param  array $properties
      */
-    public function raw($properties)
+    public function fromRaw($properties)
     {
         $this->validateProperties($properties);
 
@@ -81,7 +72,7 @@ class OpenGraphGenerator
      *
      * @param  OpenGraphAware $object
      */
-    public function object(OpenGraphAware $object)
+    public function fromObject(OpenGraphAware $object)
     {
         $properties = $object->getOpenGraphData();
 
@@ -97,19 +88,9 @@ class OpenGraphGenerator
      *
      * @return void
      */
-    public function clean()
+    public function reset()
     {
         $this->properties = array();
-    }
-
-    /**
-     * Get all the properties.
-     *
-     * @return array
-     */
-    public function getProperties()
-    {
-        return $this->properties;
     }
 
     /**
