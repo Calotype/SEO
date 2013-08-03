@@ -62,7 +62,7 @@ class MetaGenerator
      *
      * @param  MetaAware $object
      */
-    public function object(MetaAware $object)
+    public function fromObject(MetaAware $object)
     {
         $data = $object->getMetaData();
 
