@@ -1,7 +1,5 @@
 <?php
 
-define('DS', DIRECTORY_SEPARATOR);
-
 use Calotype\SEO\Generators\OpenGraphGenerator;
 
 class OpenGraphGeneratorTest extends PHPUnit_Framework_TestCase
@@ -103,7 +101,7 @@ class OpenGraphGeneratorTest extends PHPUnit_Framework_TestCase
 
     protected function getStub($name)
     {
-        return file_get_contents(__DIR__ . DS . 'stubs' . DS . $name);
+        return file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR . $name);
     }
 
     protected function getGenerator()
