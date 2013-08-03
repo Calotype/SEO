@@ -137,18 +137,30 @@ class MetaGenerator
     }
 
     /**
+     * Reset the title and description fields.
+     *
+     * @return void
+     */
+    public function reset()
+    {
+        $this->title = null;
+        $this->description = null;
+    }
+
+    /**
      * Get a default configuration.
      *
      * @param  string $default
      *
      * @return mixed
      */
-    protected function getDefault($default)
+    public function getDefault($default)
     {
         if (array_key_exists($default, $this->defaults)) {
             return $this->defaults[$default];
         }
 
-        throw new \InvalidArgumentException("Default configuration $default does not exist.");
+        $class = get_class($this);
+        throw new \InvalidArgumentException("{$class}: default configuration $default does not exist.");
     }
 }
