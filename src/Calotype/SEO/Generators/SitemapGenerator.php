@@ -63,9 +63,7 @@ class SitemapGenerator
         $this->validateObject($object);
 
         $data = $object->getSitemapData();
-        $this->validateData($data);
-
-        $this->entries[] = $this->replaceAttributes($data);
+        $this->addRaw($data);
     }
 
     /**
