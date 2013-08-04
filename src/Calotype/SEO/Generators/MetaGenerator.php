@@ -71,7 +71,7 @@ class MetaGenerator
         }
 
         if (array_key_exists('description', $data)) {
-            $this->setDescription('description');
+            $this->setDescription($data['description']);
         }
     }
 
@@ -94,15 +94,13 @@ class MetaGenerator
      */
     public function setDescription($description)
     {
-        $description = substr(strip_tags($description), 0, 150);
+        $description = strip_tags($description);
 
-        $last_dot = strrpos($description, '.');
-
-        if ($last_dot !== false and $last_dot > 120) {
-            return $this->description = substr($description, 0, $last_dot + 1);
+        if (strlen($description) > 160) {
+            $description = substr($description, 0, 160);
         }
 
-        $this->description = $description . ' ...';
+        $this->description = $description;
     }
 
     /**
