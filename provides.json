@@ -1,0 +1,23 @@
+{
+    "providers": [
+        "Calotype\SEO\Providers\SEOServiceProvider"
+    ],
+    "aliases": [
+        {
+            "alias": "SEO\Meta",
+            "facade": "Calotype\SEO\Facades\Meta"
+        },
+        {
+            "alias": "SEO\Sitemap",
+            "facade": "Calotype\SEO\Facades\Sitemap"
+        },
+        {
+            "alias": "SEO\Robots",
+            "facade": "Calotype\SEO\Facades\Robots"
+        },
+        {
+            "alias": "SEO\OpenGraph",
+            "facade": "Calotype\SEO\Facades\OpenGraph"
+        }
+    ]
+}
