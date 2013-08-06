@@ -91,6 +91,8 @@ class SitemapGenerator
     {
         $this->validateData($data);
 
+        $data['location'] = trim($data['location'], '/');
+
         $this->entries[] = $this->replaceAttributes($data);
     }
 
