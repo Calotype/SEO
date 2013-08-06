@@ -12,7 +12,7 @@
    >
 
     <testsuites>
-        <testsuite name="Package Test Suite">
+        <testsuite name="Calotype SEO Test Suite">
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
