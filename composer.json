@@ -1,6 +1,7 @@
 {
     "name": "calotype/seo",
-    "description": "Calotype SEO package for SEO helpers.",
+    "description": "A package containing SEO helpers.",
+    "keywords": ["sitemap", "robots", "meta", "seo", "opengraph", "laravel"],
     "license": "MIT",
 
     "authors": [
