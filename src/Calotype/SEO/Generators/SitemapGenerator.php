@@ -1,6 +1,7 @@
 <?php namespace Calotype\SEO\Generators;
 
-use XMLWriter, Traversable;
+use XMLWriter;
+use Traversable;
 use Calotype\SEO\Contracts\SitemapAware;
 
 class SitemapGenerator
@@ -99,7 +100,7 @@ class SitemapGenerator
     /**
      * Check if the sitemap contains an url.
      *
-     * @param  string $url
+     * @param string $url
      *
      * @return boolean
      */
@@ -159,7 +160,7 @@ class SitemapGenerator
     /**
      * Validate the data for a sitemap entry.
      *
-     * @param  array $data
+     * @param array $data
      */
     protected function validateData($data)
     {
@@ -181,7 +182,7 @@ class SitemapGenerator
     /**
      * Validate an element.
      *
-     * @param  mixed $element
+     * @param mixed $element
      */
     protected function validateObject($element)
     {
@@ -193,7 +194,7 @@ class SitemapGenerator
     /**
      * Replace the attribute names with their replacements.
      *
-     * @param  array $data
+     * @param array $data
      *
      * @return array
      */
@@ -211,7 +212,7 @@ class SitemapGenerator
     /**
      * Replace an attribute with it's replacement if available.
      *
-     * @param  string $attribute
+     * @param string $attribute
      *
      * @return string
      */

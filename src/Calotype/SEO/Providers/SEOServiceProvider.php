@@ -45,7 +45,7 @@ class SEOServiceProvider extends ServiceProvider
         $this->app['calotype.seo.generators.robots']->addSitemap($this->app['request']->root() . '/sitemap.xml');
 
         // Generate sitemap.xml route
-        $this->app['router']->get('sitemap.xml', function() use ($app) {
+        $this->app['router']->get('sitemap.xml', function () use ($app) {
             $response = new Response($app['calotype.seo.generators.sitemap']->generate(), 200);
             $response->header('Content-Type', 'text/xml');
 
@@ -53,7 +53,7 @@ class SEOServiceProvider extends ServiceProvider
         });
 
         // Generate robots.txt route
-        $this->app['router']->get('robots.txt', function() use ($app) {
+        $this->app['router']->get('robots.txt', function () use ($app) {
             $response = new Response($app['calotype.seo.generators.robots']->generate(), 200);
             $response->header('Content-Type', 'text/plain');
 
@@ -69,22 +69,22 @@ class SEOServiceProvider extends ServiceProvider
     public function registerBindings()
     {
         // Register the sitemap.xml generator
-        $this->app->singleton('calotype.seo.generators.sitemap', function($app) {
+        $this->app->singleton('calotype.seo.generators.sitemap', function ($app) {
             return new SitemapGenerator();
         });
 
         // Register the meta tags generator
-        $this->app->singleton('calotype.seo.generators.meta', function($app) {
+        $this->app->singleton('calotype.seo.generators.meta', function ($app) {
             return new MetaGenerator($app['config']->get('seo::defaults'));
         });
 
         // Register the robots.txt generator
-        $this->app->singleton('calotype.seo.generators.robots', function($app) {
+        $this->app->singleton('calotype.seo.generators.robots', function ($app) {
             return new RobotsGenerator();
         });
 
         // Register the open graph properties generator
-        $this->app->singleton('calotype.seo.generators.opengraph', function($app) {
+        $this->app->singleton('calotype.seo.generators.opengraph', function ($app) {
             return new OpenGraphGenerator();
         });
     }

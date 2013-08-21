@@ -56,7 +56,7 @@ class OpenGraphGenerator
     /**
      * Set the open graph properties from a raw array.
      *
-     * @param  array $properties
+     * @param array $properties
      */
     public function fromRaw($properties)
     {
@@ -70,7 +70,7 @@ class OpenGraphGenerator
     /**
      * Use the open graph data of a open graph aware object.
      *
-     * @param  OpenGraphAware $object
+     * @param OpenGraphAware $object
      */
     public function fromObject(OpenGraphAware $object)
     {
@@ -96,7 +96,7 @@ class OpenGraphGenerator
     /**
      * Validate to make sure the properties contain all required ones.
      *
-     * @param  array $properties
+     * @param array $properties
      */
     protected function validateProperties($properties)
     {

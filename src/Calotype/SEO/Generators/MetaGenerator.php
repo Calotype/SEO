@@ -60,7 +60,7 @@ class MetaGenerator
     /**
      * Use the meta data of a MetaAware object.
      *
-     * @param  MetaAware $object
+     * @param MetaAware $object
      */
     public function fromObject(MetaAware $object)
     {
@@ -137,7 +137,7 @@ class MetaGenerator
     /**
      * Get a default configuration.
      *
-     * @param  string $default
+     * @param string $default
      *
      * @return mixed
      */

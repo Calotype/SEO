@@ -32,11 +32,11 @@ class RobotsGenerator
     /**
      * Add a User-agent to the robots.txt.
      *
-     * @param string $user_agent
+     * @param string $userAgent
      */
-    public function addUserAgent($user_agent)
+    public function addUserAgent($userAgent)
     {
-        $this->addLine("User-agent: $user_agent");
+        $this->addLine("User-agent: $userAgent");
     }
 
     /**
@@ -73,7 +73,7 @@ class RobotsGenerator
      * Add a rule to the robots.txt.
      *
      * @param string|array $directories
-     * @param string $rule
+     * @param string       $rule
      */
     protected function addRuleLine($directories, $rule)
     {
