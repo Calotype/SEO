@@ -19,6 +19,13 @@ class MetaGenerator
     protected $description;
 
     /**
+     * The meta keywords.
+     *
+     * @var string
+     */
+    protected $keywords;
+
+    /**
      * The default configurations.
      *
      * @var array
@@ -26,7 +33,8 @@ class MetaGenerator
     protected $defaults = array(
         'title' => false,
         'description' => false,
-        'separator' => ' | '
+        'separator' => ' | ',
+        'keywords' => false
     );
 
     /**
@@ -50,9 +58,14 @@ class MetaGenerator
     {
         $title = $this->getTitle();
         $description = $this->getDescription();
+        $keywords = $this->getKeywords();
 
         $html[] = "<title>$title</title>";
-        $html[] = "<meta name='description' content='$description' />";
+        $html[] = "<meta name='description' itemprop='description' content='$description' />";
+
+        if (! empty($keywords)) {
+            $html[] = "<meta name='keywords' content='{$keywords}' />";
+        }
 
         return implode(PHP_EOL, $html);
     }
@@ -72,6 +85,10 @@ class MetaGenerator
 
         if (array_key_exists('description', $data)) {
             $this->setDescription($data['description']);
+        }
+
+        if (array_key_exists('keywords', $data)) {
+            $this->setKeywords($data['keywords']);
         }
     }
 
@@ -104,6 +121,16 @@ class MetaGenerator
     }
 
     /**
+     * Set the Meta keywords.
+     *
+     * @param string $keywords
+     */
+    public function setKeywords($keywords)
+    {
+        $this->keywords = $keywords;
+    }
+
+    /**
      * Get the Meta title.
      *
      * @return string
@@ -111,6 +138,16 @@ class MetaGenerator
     public function getTitle()
     {
         return $this->title ?: $this->getDefault('title');
+    }
+
+    /**
+     * Get the Meta keywords.
+     *
+     * @return string
+     */
+    public function getKeywords()
+    {
+        return $this->keywords ?: $this->getDefault('keywords');
     }
 
     /**
@@ -132,6 +169,7 @@ class MetaGenerator
     {
         $this->title = null;
         $this->description = null;
+        $this->keywords = null;
     }
 
     /**
