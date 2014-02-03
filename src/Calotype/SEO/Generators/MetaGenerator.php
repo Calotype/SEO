@@ -61,7 +61,10 @@ class MetaGenerator
         $keywords = $this->getKeywords();
 
         $html[] = "<title>$title</title>";
-        $html[] = "<meta name='description' itemprop='description' content='$description' />";
+        
+        if (! empty($description)) {
+            $html[] = "<meta name='description' itemprop='description' content='$description' />";
+        }
 
         if (! empty($keywords)) {
             $html[] = "<meta name='keywords' content='{$keywords}' />";
