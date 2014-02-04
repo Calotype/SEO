@@ -26,6 +26,13 @@ class MetaGenerator
     protected $keywords;
 
     /**
+     * The maximal length of the meta description.
+     *
+     * @var integer
+     */
+    protected $max_description_length = 160;
+
+    /**
      * The default configurations.
      *
      * @var array
@@ -116,8 +123,8 @@ class MetaGenerator
     {
         $description = strip_tags($description);
 
-        if (strlen($description) > 160) {
-            $description = substr($description, 0, 160);
+	if (strlen($description) > $this->max_description_length) {
+	    $description = substr($description, 0, $this->max_description_length);
         }
 
         $this->description = $description;
