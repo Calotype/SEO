@@ -68,13 +68,13 @@ class MetaGenerator
         $keywords = $this->getKeywords();
 
         $html[] = "<title>$title</title>";
-        
+
         if (! empty($description)) {
-            $html[] = "<meta name='description' itemprop='description' content='$description' />";
+            $html[] = "<meta name='description' content='$description' />";
         }
 
         if (! empty($keywords)) {
-            $html[] = "<meta name='keywords' content='{$keywords}' />";
+            $html[] = "<meta name='keywords' content='$keywords' />";
         }
 
         return implode(PHP_EOL, $html);
@@ -123,8 +123,8 @@ class MetaGenerator
     {
         $description = strip_tags($description);
 
-	if (strlen($description) > $this->max_description_length) {
-	    $description = substr($description, 0, $this->max_description_length);
+        if (strlen($description) > $this->max_description_length) {
+            $description = substr($description, 0, $this->max_description_length);
         }
 
         $this->description = $description;
@@ -137,7 +137,7 @@ class MetaGenerator
      */
     public function setKeywords($keywords)
     {
-        $this->keywords = $keywords;
+        $this->keywords = implode(',', (array) $keywords);
     }
 
     /**
@@ -147,7 +147,7 @@ class MetaGenerator
      */
     public function getTitle()
     {
-        return $this->title ?: $this->getDefault('title');
+        return $this->title ? : $this->getDefault('title');
     }
 
     /**
@@ -157,7 +157,7 @@ class MetaGenerator
      */
     public function getKeywords()
     {
-        return $this->keywords ?: $this->getDefault('keywords');
+        return $this->keywords ? : $this->getDefault('keywords');
     }
 
     /**
@@ -167,7 +167,7 @@ class MetaGenerator
      */
     public function getDescription()
     {
-        return $this->description ?: $this->getDefault('description');
+        return $this->description ? : $this->getDefault('description');
     }
 
     /**

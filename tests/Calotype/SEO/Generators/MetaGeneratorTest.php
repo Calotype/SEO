@@ -46,6 +46,22 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
         $data = $generator->generate();
 
         $this->assertEquals($this->getStub('meta-with-long-description'), $data . PHP_EOL);
+        $this->assertEquals(160, strlen($generator->getDescription()), 'Description is incorrectly fixed to a maximum of 160 characters.');
+    }
+
+    public function testCanSetKeywords()
+    {
+        $generator = $this->getGenerator();
+
+        $generator->setKeywords(array('foo', 'bar', 'baz'));
+        $data = $generator->generate();
+
+        $this->assertEquals($this->getStub('meta-with-keywords'), $data . PHP_EOL);
+
+        $generator->setKeywords('foo,bar,baz');
+        $data = $generator->generate();
+
+        $this->assertEquals($this->getStub('meta-with-keywords'), $data . PHP_EOL);
     }
 
     public function testCanSetFromObject()
@@ -56,7 +72,7 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
 
         $data = $generator->generate();
 
-        $this->assertEquals($this->getStub('meta-with-both'), $data . PHP_EOL);
+        $this->assertEquals($this->getStub('meta-with-all'), $data . PHP_EOL);
     }
 
     public function testCanGetDefaultSetting()
@@ -87,7 +103,7 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
         $generator = $this->getGenerator();
         $generator->getDefault('foo');
 
-        $data = $generator->generate();
+        $generator->generate();
     }
 
     protected function getValidProperties()
@@ -95,6 +111,7 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
         return array(
             'title' => 'Bar',
             'description' => 'Foobar is nice!',
+            'keywords' => ['foo', 'bar', 'baz'],
         );
     }
 
