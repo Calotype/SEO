@@ -47,7 +47,7 @@ class SEOServiceProvider extends ServiceProvider
         // Generate sitemap.xml route
         $this->app['router']->get('sitemap.xml', function () use ($app) {
             $response = new Response($app['calotype.seo.generators.sitemap']->generate(), 200);
-            $response->header('Content-Type', 'text/xml');
+            $response->header('Content-Type', 'application/xml');
 
             return $response;
         });
