@@ -26,7 +26,7 @@ class SitemapGenerator
      * @var array
      */
     protected $required = array(
-        'loc', 'lastmod', 'changefreq', 'priority'
+        'loc'
     );
 
     /**
