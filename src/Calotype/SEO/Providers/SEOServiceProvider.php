@@ -24,7 +24,7 @@ class SEOServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['config']->package('calotype-seo', __DIR__ . '/../../../config');
+	$this->app['config']->package('calotype/seo', __DIR__ . '/../../../config', 'calotype-seo');
 
         $this->registerBindings();
     }
@@ -90,7 +90,7 @@ class SEOServiceProvider extends ServiceProvider
 
         // Register the meta tags generator
         $this->app->singleton('calotype.seo.generators.meta', function ($app) {
-            return new MetaGenerator($app['config']->get('seo::defaults'));
+	    return new MetaGenerator($app['config']->get('calotype-seo::defaults'));
         });
 
         // Register the robots.txt generator
