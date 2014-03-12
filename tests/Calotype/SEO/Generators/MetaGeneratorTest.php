@@ -111,7 +111,7 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
         return array(
             'title' => 'Bar',
             'description' => 'Foobar is nice!',
-            'keywords' => ['foo', 'bar', 'baz'],
+            'keywords' => array('foo', 'bar', 'baz'),
         );
     }
 
