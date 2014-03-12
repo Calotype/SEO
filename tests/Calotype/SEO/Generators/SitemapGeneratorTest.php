@@ -66,6 +66,20 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         $this->assertXmlStringEqualsXmlFile(__DIR__ . '/stubs/sitemap.xml', $sitemap);
     }
 
+    public function testLocationTrailingSlashIsRemoved()
+    {
+        $generator = $this->getGenerator();
+
+        $element = $this->getElementMock(array(
+            'location' => 'example.com/'
+        ));
+
+        $generator->add($element);
+        $sitemap = $generator->generate();
+
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/stubs/sitemap-location.xml', $sitemap);
+    }
+
     public function testCanReset()
     {
         $generator = $this->getGenerator();
