@@ -24,7 +24,7 @@ class SEOServiceProvider extends ServiceProvider
      */
     public function register()
     {
-	$this->app['config']->package('calotype/seo', __DIR__ . '/../../../config', 'calotype-seo');
+        $this->app['config']->package('calotype/seo', __DIR__ . '/../../../config', 'calotype-seo');
 
         $this->registerBindings();
     }
@@ -36,8 +36,6 @@ class SEOServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $app = $this->app;
-
         // If the user does not want us to create default routes, we won't
         $should_generate_routes = $this->app['config']->get('calotype-seo::generate_routes');
 
@@ -53,14 +51,16 @@ class SEOServiceProvider extends ServiceProvider
      */
     public function generateDefaultRoutes()
     {
+        $app = $this->app;
+
         // Create the default robots.txt content
-        $this->app['calotype.seo.generators.robots']->addUserAgent('*');
-        $this->app['calotype.seo.generators.robots']->addDisallow('');
-        $this->app['calotype.seo.generators.robots']->addSpacer();
-        $this->app['calotype.seo.generators.robots']->addSitemap($this->app['request']->root() . '/sitemap.xml');
+        $app['calotype.seo.generators.robots']->addUserAgent('*');
+        $app['calotype.seo.generators.robots']->addDisallow('');
+        $app['calotype.seo.generators.robots']->addSpacer();
+        $app['calotype.seo.generators.robots']->addSitemap($app['request']->root() . '/sitemap.xml');
 
         // Generate sitemap.xml route
-        $this->app['router']->get('sitemap.xml', function () use ($app) {
+        $app['router']->get('sitemap.xml', function () use ($app) {
             $response = new Response($app['calotype.seo.generators.sitemap']->generate(), 200);
             $response->header('Content-Type', 'application/xml');
 
@@ -68,7 +68,7 @@ class SEOServiceProvider extends ServiceProvider
         });
 
         // Generate robots.txt route
-        $this->app['router']->get('robots.txt', function () use ($app) {
+        $app['router']->get('robots.txt', function () use ($app) {
             $response = new Response($app['calotype.seo.generators.robots']->generate(), 200);
             $response->header('Content-Type', 'text/plain');
 
@@ -90,7 +90,7 @@ class SEOServiceProvider extends ServiceProvider
 
         // Register the meta tags generator
         $this->app->singleton('calotype.seo.generators.meta', function ($app) {
-	    return new MetaGenerator($app['config']->get('calotype-seo::defaults'));
+            return new MetaGenerator($app['config']->get('calotype-seo::defaults'));
         });
 
         // Register the robots.txt generator
@@ -117,5 +117,4 @@ class SEOServiceProvider extends ServiceProvider
             'calotype.seo.generators.robots',
         );
     }
-
 }
