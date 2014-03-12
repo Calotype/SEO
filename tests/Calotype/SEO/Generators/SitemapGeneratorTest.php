@@ -43,7 +43,7 @@ class SitemapGeneratorTest extends PHPUnit_Framework_TestCase
         $generator = $this->getGenerator();
 
         $generator->addRaw(array(
-            'location' => 'example.com'
+            'last_modified' => '2013-01-28'
         ));
 
         $sitemap = $generator->generate();
