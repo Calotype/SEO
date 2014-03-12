@@ -24,7 +24,7 @@ class SEOServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['config']->package('calotype/seo', __DIR__ . '/../../../config');
+        $this->app['config']->package('calotype-seo', __DIR__ . '/../../../config');
 
         $this->registerBindings();
     }
@@ -38,6 +38,21 @@ class SEOServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
+        // If the user does not want us to create default routes, we won't
+        $should_generate_routes = $this->app['config']->get('calotype-seo::generate_routes');
+
+        if ($should_generate_routes) {
+            $this->generateDefaultRoutes();
+        }
+    }
+
+    /**
+     * Generate default routes for /sitemap.xml and /robots.txt
+     *
+     * @return void
+     */
+    public function generateDefaultRoutes()
+    {
         // Create the default robots.txt content
         $this->app['calotype.seo.generators.robots']->addUserAgent('*');
         $this->app['calotype.seo.generators.robots']->addDisallow('');
