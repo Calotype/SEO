@@ -88,13 +88,32 @@ class SitemapGenerator
      *
      * @param array $data
      */
-    public function addRaw($data)
+    public function addRaw(array $data)
     {
         $this->validateData($data);
 
-        $data['location'] = trim($data['location'], '/');
+        $data = $this->prepareData($data);
 
-        $this->entries[] = $this->replaceAttributes($data);
+        $this->entries[] = $data;
+    }
+
+    /**
+     * Prepare the data.
+     *
+     * @param  array $data
+     *
+     * @return array
+     */
+    public function prepareData(array $data)
+    {
+        $data = $this->replaceAttributes($data);
+
+        // Remove trailing slashes from the location
+        if (array_key_exists('loc', $data)) {
+            $data['loc'] = trim($data['loc'], '/');
+        }
+
+        return $data;
     }
 
     /**
