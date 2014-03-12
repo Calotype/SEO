@@ -4,11 +4,8 @@ return array(
 
     /*
     |--------------------------------------------------------------------------
-    | Default configurations
+    | These are the default values use to generate the meta tags of a page.
     |--------------------------------------------------------------------------
-    |
-    | The default configurations to be used by the meta generator.
-    |
     */
 
     'defaults' => array(
@@ -16,5 +13,15 @@ return array(
         'description' => false,
         'separator' => ' | '
     ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Should we generate the /sitemap.xml and /robots.txt routes
+    | with sensible defaults? Set this to false if you are
+    | going to provide your own routes to handle them.
+    |--------------------------------------------------------------------------
+    */
+
+    'generate_routes' => true
 
 );
