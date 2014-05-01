@@ -1,3 +1,4 @@
 <title>Bar - Foo</title>
 <meta name='description' content='Foobar is nice!' />
 <meta name='keywords' content='foo,bar,baz' />
+<link rel='canonical' href='http://example.org' />
