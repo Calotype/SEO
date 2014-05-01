@@ -64,6 +64,16 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->getStub('meta-with-keywords'), $data . PHP_EOL);
     }
 
+    public function testCanSetCanonical()
+    {
+        $generator = $this->getGenerator();
+
+        $generator->setCanonical('http://example.org');
+        $data = $generator->generate();
+
+        $this->assertEquals($this->getStub('meta-with-canonical'), $data . PHP_EOL);
+    }
+
     public function testCanSetFromObject()
     {
         $generator = $this->getGenerator();
@@ -89,10 +99,14 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
 
         $generator->setTitle('Bar');
         $generator->setDescription('Lorem ipsum dolor sit amet.');
+        $generator->setKeywords(array('foo', 'bar', 'baz'));
+        $generator->setCanonical('http://foobar.baz');
         $generator->reset();
 
         $this->assertEquals('Foo', $generator->getTitle());
         $this->assertEquals('This is a description', $generator->getDescription());
+        $this->assertEmpty($generator->getKeywords());
+        $this->assertEquals('', $generator->getCanonical());
     }
 
     /**
@@ -112,6 +126,7 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
             'title' => 'Bar',
             'description' => 'Foobar is nice!',
             'keywords' => array('foo', 'bar', 'baz'),
+            'canonical' => 'http://example.org'
         );
     }
 

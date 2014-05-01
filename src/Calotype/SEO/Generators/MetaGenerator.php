@@ -32,7 +32,7 @@ class MetaGenerator
      */
     protected $max_description_length = 160;
 
-    /**
+    /*
      * The default configurations.
      *
      * @var array
@@ -43,6 +43,13 @@ class MetaGenerator
         'separator' => ' | ',
         'keywords' => false
     );
+
+    /**
+     * The canonical url.
+     *
+     * @var array
+     */
+    protected $canonical;
 
     /**
      * Create a new MetaGenerator instance.
@@ -66,6 +73,7 @@ class MetaGenerator
         $title = $this->getTitle();
         $description = $this->getDescription();
         $keywords = $this->getKeywords();
+        $canonical = $this->getCanonical();
 
         $html[] = "<title>$title</title>";
 
@@ -75,6 +83,10 @@ class MetaGenerator
 
         if (! empty($keywords)) {
             $html[] = "<meta name='keywords' content='$keywords' />";
+        }
+
+        if (! empty($canonical)) {
+            $html[] = "<link rel='canonical' href='$canonical' />";
         }
 
         return implode(PHP_EOL, $html);
@@ -99,6 +111,10 @@ class MetaGenerator
 
         if (array_key_exists('keywords', $data)) {
             $this->setKeywords($data['keywords']);
+        }
+
+        if (array_key_exists('canonical', $data)) {
+            $this->setCanonical($data['canonical']);
         }
     }
 
@@ -133,7 +149,7 @@ class MetaGenerator
     /**
      * Set the Meta keywords.
      *
-     * @param string $keywords
+     * @param array|string $keywords
      */
     public function setKeywords($keywords)
     {
@@ -171,6 +187,26 @@ class MetaGenerator
     }
 
     /**
+     * Set the canonical url.
+     *
+     * @param string $url
+     */
+    public function setCanonical($url)
+    {
+        $this->canonical = $url;
+    }
+
+    /**
+     * Get the canonical url.
+     *
+     * @return string
+     */
+    public function getCanonical()
+    {
+        return $this->canonical;
+    }
+
+    /**
      * Reset the title and description fields.
      *
      * @return void
@@ -180,6 +216,7 @@ class MetaGenerator
         $this->title = null;
         $this->description = null;
         $this->keywords = null;
+        $this->canonical = null;
     }
 
     /**
