@@ -8,7 +8,9 @@ interface MetaAware
      * <code>
      * $data = array(
      *     'title' => 'About us',
-     *     'description' => 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
+     *     'description' => 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+     *     'keywords' => array('foo', 'bar', 'baz'),
+     *     'canonical' => 'http://example.org/team'
      * );
      * </code>
      *
