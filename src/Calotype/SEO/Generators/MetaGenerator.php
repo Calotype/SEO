@@ -1,5 +1,6 @@
 <?php namespace Calotype\SEO\Generators;
 
+use Illuminate\Support\Facades\Request;
 use Calotype\SEO\Contracts\MetaAware;
 
 class MetaGenerator
@@ -86,7 +87,11 @@ class MetaGenerator
         }
 
         if (! empty($canonical)) {
-            $html[] = "<link rel='canonical' href='$canonical' />";
+            $url = Request::fullUrl();
+            
+            if ($canonical != $url) {
+                $html[] = "<link rel='canonical' href='$canonical' />";
+            }
         }
 
         return implode(PHP_EOL, $html);

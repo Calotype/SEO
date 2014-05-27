@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Request;
 use Calotype\SEO\Generators\MetaGenerator;
 
 class MetaGeneratorTest extends PHPUnit_Framework_TestCase
@@ -66,6 +67,8 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
 
     public function testCanSetCanonical()
     {
+        Request::shouldReceive('fullUrl')->once()->andReturn('http://example.org?utm_source=google');
+        
         $generator = $this->getGenerator();
 
         $generator->setCanonical('http://example.org');
@@ -76,6 +79,8 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
 
     public function testCanSetFromObject()
     {
+        Request::shouldReceive('fullUrl')->once()->andReturn('http://example.org?utm_source=google');
+        
         $generator = $this->getGenerator();
         $object = $this->getObjectMock($this->getValidProperties());
         $generator->fromObject($object);
@@ -95,6 +100,8 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
 
     public function testCanResetMetas()
     {
+        Request::shouldReceive('fullUrl')->once()->andReturn('http://foobar.baz?utm_source=google');
+        
         $generator = $this->getGenerator();
 
         $generator->setTitle('Bar');
