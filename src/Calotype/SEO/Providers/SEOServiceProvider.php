@@ -113,6 +113,7 @@ class SEOServiceProvider extends ServiceProvider
     {
         return array(
             'calotype.seo.generators.meta',
+            'calotype.seo.generators.opengraph',
             'calotype.seo.generators.sitemap',
             'calotype.seo.generators.robots',
         );
