@@ -1,4 +1,4 @@
-<?php namespace Calotype\SEO\Facades;
+<?php namespace Calotype\SEO\Support\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

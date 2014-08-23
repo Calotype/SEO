@@ -1,8 +1,7 @@
-<?php namespace Calotype\SEO\Providers;
+<?php namespace Calotype\SEO\Support\Laravel\Providers;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
-
 use Calotype\SEO\Generators\MetaGenerator;
 use Calotype\SEO\Generators\RobotsGenerator;
 use Calotype\SEO\Generators\SitemapGenerator;
