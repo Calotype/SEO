@@ -120,6 +120,8 @@ class SEOServiceProvider extends ServiceProvider
             'calotype.seo.generators.meta',
             'calotype.seo.generators.sitemap',
             'calotype.seo.generators.robots',
+            'calotype.seo.generators.opengraph',
+            'calotype.seo.generators.twittercard'
         );
     }
 }
