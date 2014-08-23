@@ -16,10 +16,10 @@
     },
 
     "require-dev": {
-        "mockery/mockery": "0.7.2",
-        "phpunit/phpunit": "3.7.*",
-        "illuminate/http": "4.0.*",
-        "illuminate/support": "4.0.*"
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "4.2.*",
+        "illuminate/http": "4.2.*",
+        "illuminate/support": "4.2.*"
     },
 
     "suggest": {
@@ -27,7 +27,7 @@
     },
 
     "autoload": {
-        "psr-0": { "Calotype\\SEO": "src/" }
+        "psr-4": { "Calotype\\SEO\\": "src/Calotype/SEO" }
     },
 
     "minimum-stability": "dev"
