@@ -144,10 +144,13 @@ class MetaGeneratorTest extends PHPUnit_Framework_TestCase
 
     protected function getGenerator()
     {
-        return new MetaGenerator(array(
+        $generator = new MetaGenerator(array(
             'title' => 'Foo',
-            'description' => 'This is a description',
-            'separator' => ' - '
+            'description' => 'This is a description'
         ));
+
+        $generator->setFormat('{title} - Foo');
+
+        return $generator;
     }
 }

@@ -26,6 +26,13 @@ class MetaGenerator
     protected $keywords;
 
     /**
+     * The format used to generate the meta title.
+     *
+     * @var string
+     */
+    protected $format;
+
+    /**
      * The maximal length of the meta description.
      *
      * @var integer
@@ -127,7 +134,7 @@ class MetaGenerator
     {
         $title = strip_tags($title);
 
-        $this->title = $title . $this->getDefault('separator') . $this->getDefault('title');
+        $this->title = str_replace('{title}', $title, $this->getFormat());
     }
 
     /**
@@ -204,6 +211,26 @@ class MetaGenerator
     public function getCanonical()
     {
         return $this->canonical;
+    }
+
+    /**
+     * Get the format used to generate the meta title.
+     *
+     * @return string
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    /**
+     * Set the format used to generate the meta title.
+     *
+     * @param string $format
+     */
+    public function setFormat($format)
+    {
+        $this->format = $format;
     }
 
     /**

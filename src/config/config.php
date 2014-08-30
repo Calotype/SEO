@@ -11,8 +11,16 @@ return array(
     'defaults' => array(
         'title' => false,
         'description' => false,
-        'separator' => ' | '
     ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Here you can set a default format for the title tag
+    | you can use the placeholder {title}.
+    |--------------------------------------------------------------------------
+    */
+
+    'title_format' => '{title} - Application',
 
     /*
     |--------------------------------------------------------------------------
