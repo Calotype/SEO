@@ -93,14 +93,12 @@ class MetaGenerator
     }
 
     /**
-     * Use the meta data of a MetaAware object.
+     * Use data from raw array.
      *
-     * @param MetaAware $object
+     * @param array $data
      */
-    public function fromObject(MetaAware $object)
+    public function fromRaw($data)
     {
-        $data = $object->getMetaData();
-
         if (array_key_exists('title', $data)) {
             $this->setTitle($data['title']);
         }
@@ -116,6 +114,18 @@ class MetaGenerator
         if (array_key_exists('canonical', $data)) {
             $this->setCanonical($data['canonical']);
         }
+    }
+
+    /**
+     * Use the meta data of a MetaAware object.
+     *
+     * @param MetaAware $object
+     */
+    public function fromObject(MetaAware $object)
+    {
+        $data = $object->getMetaData();
+
+        $this->fromRaw($data);
     }
 
     /**
