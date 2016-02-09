@@ -23,16 +23,10 @@ SEO is a package that provides helpers for some common SEO techniques.
 
 ### Composer / Packagist
 
-Require the package in your `composer.json`.
-
-```
-"calotype/seo": "dev-master"
-```
-
-Run composer install or update to download the package.
+Require the package with Composer to install the latest stable version:
 
 ```bash
-$ composer update
+composer require calotype/seo
 ```
 
 ## Providers
