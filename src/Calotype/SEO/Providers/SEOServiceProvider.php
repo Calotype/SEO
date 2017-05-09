@@ -7,6 +7,7 @@ use Calotype\SEO\Generators\MetaGenerator;
 use Calotype\SEO\Generators\RobotsGenerator;
 use Calotype\SEO\Generators\SitemapGenerator;
 use Calotype\SEO\Generators\OpenGraphGenerator;
+use Calotype\SEO\Generators\TwitterCardGenerator;
 
 class SEOServiceProvider extends ServiceProvider
 {
@@ -101,6 +102,11 @@ class SEOServiceProvider extends ServiceProvider
         // Register the open graph properties generator
         $this->app->singleton('calotype.seo.generators.opengraph', function ($app) {
             return new OpenGraphGenerator();
+        });
+
+        // Register the twitter card properties generator
+        $this->app->singleton('calotype.seo.generators.twittercard', function ($app) {
+            return new TwitterCardGenerator();
         });
     }
 
