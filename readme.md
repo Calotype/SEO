@@ -1,6 +1,6 @@
 [![Latest Stable Version](https://poser.pugx.org/calotype/seo/version.png)](https://packagist.org/packages/calotype/seo) [![Total Downloads](https://poser.pugx.org/calotype/seo/d/total.png)](https://packagist.org/packages/calotype/seo) [![Build Status](https://travis-ci.org/Calotype/SEO.png)](https://travis-ci.org/Calotype/SEO)
 
-# Calotype / SEO
+# Tacnix / SEO
 
 > **Warning!** This package is still in an alpha/beta state.
 
@@ -43,12 +43,12 @@ Just register the service provider and the facades in `app/config/app.php` and y
 
 ```php
 // Service provider
-'Calotype\SEO\Providers\SEOServiceProvider',
+'Tacnix\SEO\Providers\SEOServiceProvider',
 
 // Facades (can customize if preferred)
-'SEO\Meta'    => 'Calotype\SEO\Facades\Meta',
-'SEO\Sitemap' => 'Calotype\SEO\Facades\Sitemap',
-'SEO\Robots'  => 'Calotype\SEO\Facades\Robots',
+'SEO\Meta'    => 'Tacnix\SEO\Facades\Meta',
+'SEO\Sitemap' => 'Tacnix\SEO\Facades\Sitemap',
+'SEO\Robots'  => 'Tacnix\SEO\Facades\Robots',
 ```
 
 
