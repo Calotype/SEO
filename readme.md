@@ -3,7 +3,9 @@
 
 [![Latest Stable Version](https://poser.pugx.org/calotype/seo/version.png)](https://packagist.org/packages/calotype/seo) [![Total Downloads](https://poser.pugx.org/calotype/seo/d/total.png)](https://packagist.org/packages/calotype/seo) [![Build Status](https://travis-ci.org/Calotype/SEO.png)](https://travis-ci.org/Calotype/SEO)
 
-## Snaturato / SEO
+> **Duplicate:** Tacnix / SEO
+
+## Tacnix / SEO
 
 > **Warning!** This package is still in an alpha/beta state.
 
