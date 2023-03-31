@@ -5,6 +5,8 @@
 
 > **Duplicate:** Tacnix / SEO
 
+[![Latest Stable Version](https://poser.pugx.org/tacnix/seo/version.png)](https://packagist.org/packages/tacnix/seo) [![Total Downloads](https://poser.pugx.org/tacnix/seo/d/total.png)](https://packagist.org/packages/tacnix/seo) [![Build Status](https://travis-ci.org/tacnix/SEO.png)](https://travis-ci.org/tacnix/SEO)
+
 ## Tacnix / SEO
 
 > **Warning!** This package is still in an alpha/beta state.
